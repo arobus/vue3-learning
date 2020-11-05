@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+    display: flex;
+}
+
+.container {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    padding: 1em;
+    background: #fff;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form, .list {
+    display: flex;
+    width: 100%;
+}
+
+.list {
+    border: 1px solid #aaa;
+    margin-top: 0.5em;
+}
+
+.form {
+    flex-direction: column;
+}
+
+#goal {
+    border: 1px solid #aaa;
+    padding: .5em;
+    border-radius: 5px;
+    line-height: 25px;
+    font-size: 1.5rem;
+}
+
+#addGoal {
+    border: 1px solid #fff;
+    font-size: 1.2rem;
+    box-shadow: 0px 5px 6px -2px #aaa;
+    background-color: #888;
+    width: 15%;
+    color: #fff;
+    padding: .5rem;
+    margin-top: .5em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.list {
+    height: 95%;
+}
+
+.goals {
+    padding: 1em;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    overflow-y: scroll;
+}
+
+.goals li {
+    padding: 1em;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 1.5rem;
+}
+
+.goals li + li {
+    margin-top: 0.5em;
+}
