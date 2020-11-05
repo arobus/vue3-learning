@@ -70,6 +70,11 @@ html, body {
     cursor: pointer;
 }
 
+#addGoal:disabled {
+    background-color: #ccc;
+    color: white;
+}
+
 .list {
     height: 95%;
 }
@@ -91,4 +96,12 @@ html, body {
 
 .goals li + li {
     margin-top: 0.5em;
+}
+
+.error {
+    font-size: 1.5rem;
+    color: #ff5c5c;
+    font-weight: bold;
+    margin-left: 2em;
+    line-height: 2em;
 }

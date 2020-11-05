@@ -1,19 +1,27 @@
-const goalInput = document.querySelector("#goal")
-const goalInputButton = document.querySelector("#addGoal")
-const goalList = document.querySelector(".goals")
-
-const addGoalToList = (goal) => {
-    const goalListItem = document.createElement('li')
-    goalListItem.textContent = goal
-    goalList.appendChild(goalListItem)
-}
-
-goalInputButton.addEventListener("click", function(e) {
-    const goal = goalInput.value
-    if (typeof goal !== 'undefined' && goal !== '') {
-        addGoalToList(goal)
-        goalInput.value = ''
-    } else {
-        alert('Goal should not be empty! Everyone should have goals')
+Vue.createApp({
+    data() {
+        return {
+            goals: [],
+            goal: null,
+            errors: []
+        }
+    },
+    computed: {
+        valid() {            
+            return this.goal != null && typeof goal !== 'undefined' && this.goal.length > 0;
+        }
+    },
+    methods: {
+        addGoalToList() {
+            if (this.valid) {
+                this.goals.push(this.goal)
+                this.goal = ''
+                this.errors = []
+            } else {
+                console.error('Goal is required')
+                this.errors.push("Goal is required")
+            }
+            
+        }
     }
-})
+}).mount("#app")

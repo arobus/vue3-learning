@@ -8,17 +8,32 @@
             <div class="container">
                 <div class="content">
                     <div class="form">
-                        <input id="goal" type="text" name="goal">
-                        <input id="addGoal" type="button" value="Add Goal"> 
+                        <input
+                            id="goal"
+                            v-model="goal"
+                            type="text"
+                            required
+                        >
+                        <div style="display: flex; justify-content: space-between;">
+                            <input 
+                                id="addGoal"
+                                @click="addGoalToList()"
+                                :disabled="!valid"
+                                type="button"
+                                value="Add Goal"
+                            >
+                            <span class="error" v-for="error in errors">{{ error }}</span>
+                        </div>                        
                     </div>
                     <div class="list">
                         <ul class="goals">
-                            
+                           <li v-for="goal in goals">{{ goal }}</li> 
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="https://unpkg.com/vue@next"></script>
         <script src="app.js"></script>
     </body>
 </html>
