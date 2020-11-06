@@ -14,11 +14,26 @@
   </head>
   <body>
     <header>
-      <h1>Vue Course Goals</h1>
+      <h1>Vue Dynamic Styling</h1>
     </header>
-    <section id="user-goal">
-      <h2>My Course Goal</h2>
-      <p></p>
+    <section id="styling">
+      <!-- Using computed properties to define dynamic classes -->
+      <div 
+        class="demo"
+        :class="boxAClasses"
+        @click="selectBox('A')">
+      </div>
+      <!-- Using array syntax to define dynamic classes -->
+      <div
+        :class="['demo', {active: boxBSelected}]"
+        @click="selectBox('B')">
+      </div>
+      <!-- Using object to define dynamic classes -->
+      <div 
+        class="demo"
+        :class="{active: boxCSelected}"
+        @click="selectBox('C')">
+      </div>
     </section>
   </body>
 </html>
