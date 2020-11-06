@@ -16,9 +16,14 @@
     <header>
       <h1>Vue Course Goals</h1>
     </header>
-    <section id="user-goal">
-      <h2>My Course Goal</h2>
-      <p></p>
+    <section id="user-goals">
+      <h2>My course goals</h2>
+      <input type="text" v-model="goal" />
+      <button @click="addGoal">Add Goal</button>
+      <p v-if="goals.length === 0">No goals have been added yet - please start adding some!</p>
+      <ul v-else>
+        <li v-for="(goal, index) in goals" @click="removeGoal(index)" :key="'goal-'+index">{{ goal }}</li>
+      </ul>
     </section>
   </body>
 </html>
