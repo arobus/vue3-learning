@@ -1,107 +1,119 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-*:focus {
-    outline: 0;
+html {
+  font-family: 'Jost', sans-serif;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
+body {
+  margin: 0;
 }
 
-#app {
-    width: 100%;
-    height: 100%;
-    background-color: #f1f1f1;
-    display: flex;
+header {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 0.5rem;
+  background-color: #880017;
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+section {
+  width: 90%;
+  max-width: 40rem;
+  margin: auto;
+}
+
+.healthbar {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #575757;
+  margin: 1rem 0;
+  background: #fde5e5;
+}
+
+.healthbar__value {
+  background-color: #00a876;
+  width: 100%;
+  height: 100%;
 }
 
 .container {
-    width: 80%;
-    height: 100%;
-    margin: auto;
-    padding: 1em;
-    background: #fff;
+  text-align: center;
+  padding: 0.5rem;
+  margin: 1rem auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 12px;
 }
 
-.content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+#monster h2,
+#player h2 {
+  margin: 0.25rem;
 }
 
-.form, .list {
-    display: flex;
-    width: 100%;
+#controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
-.list {
-    border: 1px solid #aaa;
-    margin-top: 0.5em;
+button {
+  font: inherit;
+  border: 1px solid #88005b;
+  background-color: #88005b;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin: 1rem;
+  width: 12rem;
+  cursor: pointer;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
 
-.form {
-    flex-direction: column;
+button:focus {
+  outline: none;
 }
 
-#goal {
-    border: 1px solid #aaa;
-    padding: .5em;
-    border-radius: 5px;
-    line-height: 25px;
-    font-size: 1.5rem;
+button:hover,
+button:active {
+  background-color: #af0a78;
+  border-color: #af0a78;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.26);
 }
 
-#addGoal {
-    border: 1px solid #fff;
-    font-size: 1.2rem;
-    box-shadow: 0px 5px 6px -2px #aaa;
-    background-color: #888;
-    width: 15%;
-    color: #fff;
-    padding: .5rem;
-    margin-top: .5em;
-    border-radius: 5px;
-    cursor: pointer;
+button:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+  box-shadow: none;
+  color: #3f3f3f;
+  cursor: not-allowed;
 }
 
-#addGoal:disabled {
-    background-color: #ccc;
-    color: white;
+#log ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.list {
-    height: 95%;
+#log li {
+  margin: 0.5rem 0;
 }
 
-.goals {
-    padding: 1em;
-    width: 100%;
-    height: 100%;
-    list-style: none;
-    overflow-y: scroll;
+.log--player {
+  color: #7700ff;
 }
 
-.goals li {
-    padding: 1em;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    font-size: 1.5rem;
+.log--monster {
+  color: #da8d00;
 }
 
-.goals li + li {
-    margin-top: 0.5em;
+.log--damage {
+  color: red;
 }
 
-.error {
-    font-size: 1.5rem;
-    color: #ff5c5c;
-    font-weight: bold;
-    margin-left: 2em;
-    line-height: 2em;
+.log--heal {
+  color: green;
 }

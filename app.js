@@ -1,27 +1,111 @@
-Vue.createApp({
+function randomNumber(min,max) {
+    return Math.floor(Math.random() * (max - min)) + 5;       
+}
+
+const app = Vue.createApp({
     data() {
         return {
-            goals: [],
-            goal: null,
-            errors: []
-        }
-    },
-    computed: {
-        valid() {            
-            return this.goal != null && typeof goal !== 'undefined' && this.goal.length > 0;
+            playerHealth: 100,
+            monsterHealth: 100,
+            currentRound: 0,
+            winner: null,
+            logMessages: []
         }
     },
     methods: {
-        addGoalToList() {
-            if (this.valid) {
-                this.goals.push(this.goal)
-                this.goal = ''
-                this.errors = []
+        startGame() {
+            this.playerHealth = 100;
+            this.monsterHealth = 100;
+            this.winner = null;
+            this.currentRound = 0;
+            this.logMessages = [];
+        },       
+        attackMonster() {
+            this.currentRound++;
+            const attackValue = randomNumber(5, 12);
+            this.monsterHealth -= attackValue;
+            this.addLogMessage('player', 'attack', attackValue);
+            this.attackPlayer();
+        },
+        attackPlayer() {
+            const attackValue = randomNumber(8, 15);
+            this.playerHealth -= attackValue;
+            this.addLogMessage('monster', 'attack', attackValue);
+        },
+        specialAttackMonster() {
+            this.currentRound++;
+            const attackValue = randomNumber(10, 25);
+            this.monsterHealth -= attackValue;
+            this.addLogMessage('player', 'special-attack', attackValue);
+            this.attackPlayer();            
+        },
+        healPlayer() {
+            this.currentRound++;
+            const healValue = randomNumber(8, 20);
+            if (this.playerHealth + healValue > 100) {
+                this.playerHealth = 100;
+            } else {                
+                this.playerHealth += healValue;
+            }
+            this.addLogMessage('player', 'heal', healValue);
+            this.attackPlayer();
+        },
+        surrender() {
+            this.winner = 'monster';
+        },
+        addLogMessage(who, what, value) {
+            this.logMessages.unshift({
+                actionBy: who,
+                actionType: what,
+                actionValue: value
+            })
+        } 
+    },
+    watch: {
+        playerHealth(value) {
+            if (value <= 0 && this.monsterHealth <= 0) {
+                this.winner = 'draw'
+            } else if (value <= 0) {
+                this.winner = 'monster'
+            }
+        },
+        monsterHealth(value) {
+            if (value <= 0 && this.playerHealth <= 0) {
+                this.winner = 'draw'
+            } else if (value <= 0) {
+                this.winner = 'player'
+            }
+
+        }
+    },
+    computed: {
+        monsterHealthStyle() {
+            if (this.monsterHealth < 0) {
+                return {
+                    width: '0%'
+                }
             } else {
-                console.error('Goal is required')
-                this.errors.push("Goal is required")
+                return {
+                    width: this.monsterHealth + '%'
+                }
             }
             
+        },
+        playerHealthStyle() {
+            if (this.playerHealth < 0) {
+                return {
+                    width: '0%'
+                }
+            } else {
+                return {
+                    width: this.playerHealth + '%'
+                }
+            }
+        },
+        canUseSpecialAttack() {
+            return this.currentRound % 3 !== 0
         }
     }
-}).mount("#app")
+});
+
+app.mount("#game");
