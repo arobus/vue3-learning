@@ -1,4 +1,12 @@
 <template>
+    <base-dialog v-if="showErrorDialog" title="Error!">
+        <template #default>
+            <p>Please check inputs again</p>
+        </template>
+        <template #actions>
+            <base-button @click="confirmError">OK</base-button>
+        </template>
+    </base-dialog>
     <base-card>
         <form @submit.prevent="submitData">
             <div class="form-control">
@@ -27,22 +35,27 @@ export default {
         return {
             title: "",
             description: "",
-            link: ""
+            link: "",
+            showErrorDialog: false          
         }
     },
     methods: {
-        validateInput() {
-            return (this.title != "" && this.description != "" && this.link != "" );
-        },
         submitData() {
-            if (this.validateInput()) {
+            if (this.isInputsValid) {
                 this.addResource({ title: this.title, description: this.description, link: this.link });
 
             } else {
-                // show error
+                this.showErrorDialog = true;
             }
+        },
+        confirmError() {
+            this.showErrorDialog = false;
         }
-
+    },
+    computed: {
+        isInputsValid() {
+return (this.title.trim() != "" && this.description.trim() != "" && this.link.trim() != "" );
+        }
     }
 }
 </script>

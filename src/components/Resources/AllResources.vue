@@ -1,6 +1,6 @@
 <template>
     <ul>        
-        <resource v-for="res in resources" :key="res.id" :title="res.title" :description="res.description" :link="res.link"></resource    >
+        <resource v-for="res in resources" :key="res.id" :id="res.id" :title="res.title" :description="res.description" :link="res.link"></resource    >
     </ul>
 </template>
 <script>
