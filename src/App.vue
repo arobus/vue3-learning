@@ -1,15 +1,15 @@
 <template>
     <the-header title="Don't Forget Me"></the-header>
-    <all-resources></all-resources>
+    <the-resources></the-resources>
 </template>
 
 <script>
 import TheHeader from './components/layout/TheHeader.vue'
-import AllResources from './components/Resources/AllResources.vue'
+import TheResources from './components/Resources/TheResources.vue'
 
 export default {
     components: {
-        AllResources,
+        TheResources,
         TheHeader
     }
 }
