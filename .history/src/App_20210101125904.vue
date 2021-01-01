@@ -30,7 +30,7 @@ export default {
     UserAuth
   },
   computed: {
-    ...mapGetters('auth', ['isLoggedIn'])
+    ...mapGetters(['isLoggedIn'])
   }
 };
 </script>

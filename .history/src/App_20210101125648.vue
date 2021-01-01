@@ -1,5 +1,5 @@
 <template>
-  <base-container title="Vuex" v-if="isLoggedIn">
+  <base-container title="Vuex" v-if="">
     <the-counter></the-counter>
     <favorite-value></favorite-value>
     <change-counter></change-counter>
@@ -19,8 +19,7 @@ import TheCounter from './components/TheCounter.vue';
 import FavoriteValue from './components/FavoriteValue.vue';
 import ChangeCounter from './components/ChangeCounter.vue';
 import UserAuth from './components/UserAuth.vue';
-
-import { mapGetters } from 'vuex'
+ 
 export default {
   components: {
     BaseContainer,
@@ -28,9 +27,6 @@ export default {
     FavoriteValue,
     ChangeCounter,
     UserAuth
-  },
-  computed: {
-    ...mapGetters('auth', ['isLoggedIn'])
   }
 };
 </script>
