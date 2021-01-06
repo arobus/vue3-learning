@@ -1,16 +1,23 @@
 <template>
   <section class="container">
     <!-- use userName if using single variable ref -->
-    <h2>{{ user.name }}</h2>
-    <h2>{{ user.age }}</h2>
+    <!-- <h2>{{ user.name }}</h2>
+    <h2>{{ user.age }}</h2> -->
+    <h2>{{ uName }}</h2>
+    <h2>{{ uAge }}</h2>
+    <button @click="changeAge">Change Age</button>
+    <input v-model="firstName">
+    <input v-model="lastName">
+
   </section>
 </template>
 
 <script>
 import {
-  //  ref
+   ref
   //,reactive
-
+  ,computed
+  , watch
   } from 'vue'
 export default {
   // data() {
@@ -51,6 +58,33 @@ export default {
     // }, 2000);
     // return { user: user };
 
+    const firstName = ref('');
+    const lastName = ref('');
+
+    const uAge = ref(31);
+
+    const uName = computed(function() {
+      return firstName.value + ' ' + lastName.value
+    })
+
+    function changeAge() {
+      uAge.value = 32;
+    }
+
+    watch([uAge, uName], function(newValues, oldValues) {
+      console.log('oldAge', oldValues[0])
+      console.log('newAge', newValues[0])
+      console.log('oldName', oldValues[1])
+      console.log('newName', newValues[1])
+    });
+
+    return {
+      uName,
+      uAge,
+      changeAge,
+      firstName,
+      lastName
+    }
   }
 };
 </script>
