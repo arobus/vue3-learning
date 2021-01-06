@@ -3,13 +3,12 @@
         <template #header>
             <h2>Filter Coach Type</h2>
         </template>
-        <template>
+        <template #default>
             <ul>
-                <li v-for="role in getRoles" :key="role">
-                    <div class="form-control">
-                        <input type="checkbox" :id="'role-' + role" name="role" value="role" v-model="chosenRoles" @change="updateCoachFilter(chosenRoles)" />
+                <li v-for="role in getRoles" :key="'filter-'+role">
+                        <input type="checkbox" :id="'role-' + role" name="role" :value="role" v-model="chosenRoles" @change="updateCoachFilter(chosenRoles)" />
                         <label :for="'role-' + role">{{ role }}</label>
-                    </div>
+
                 </li>
             </ul>
         </template>
@@ -20,7 +19,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
     data() {
         return {
-            chosenRoles: [],
+            chosenRoles: [ "Frontend"],
         }
     },
     computed: {
@@ -31,3 +30,6 @@ export default {
     }
 }
 </script>
+<style scoped>
+    li { list-style: none; }
+</style>

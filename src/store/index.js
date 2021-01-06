@@ -15,11 +15,13 @@ const store = createStore({
     },
     getters: {
         coachFilter(state) {
+            console.log('state', state);
             return state.coachFilter
         }
     },
     mutations: {
         setCoachFilter(state, payload) {
+            console.log('payload', payload)
             state.coachFilter = payload
         }
     },

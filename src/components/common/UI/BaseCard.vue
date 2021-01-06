@@ -4,6 +4,9 @@
             <slot name="header"><h3>Default Header</h3></slot>
         </header>
         <slot></slot>
+        <section v-if="$slots.actions">
+            <slot name="actions"></slot>
+        </section>
         <footer v-if="$slots.footer">
             <slot name="footer"><h3>Default Footer</h3></slot>
         </footer>

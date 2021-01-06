@@ -20,15 +20,17 @@ const router = createRouter({
         },
         {
             path: "/coach/:id",
-            component: CoachDetails
+            component: CoachDetails,
+            props: true
         },
         {
             path: "/register",
             component: CoachRegistration
         },
         {
-            path: "/contact",
-            component: ContactCoach
+            path: "/contact/:coachId",
+            component: ContactCoach,
+            props: true
         },
         {
             path: "/requests",

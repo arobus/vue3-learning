@@ -1,20 +1,23 @@
 <template>
     <Coach
-        v-bind="getCoach({ id: coachID })"
+        v-if="getCoach({ id })"
+        v-bind="getCoach({ id })"
         detailed="true"
     />
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import Coach from '../../components/coach/Coach'
 export default {
-    props: {
-        coachID: {
-            type: Number,
-            required: true
-        }
+    components: {
+        Coach
     },
+    props: ['id'],
     computed: {
         ...mapGetters("coach", ['getCoach'])
+    },
+    mounted() {
+        console.log('coachID', this.id)
     }
 }
 </script>

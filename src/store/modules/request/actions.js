@@ -16,7 +16,7 @@ export default {
             headers: {
                 "Content-Type": "application/json"
             },
-            payload
+            body: JSON.stringify(payload)
         })
         .then(response => response.json())
         .then(response => ctx.dispatch('requestResponse', response ))
