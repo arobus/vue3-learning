@@ -1,122 +1,48 @@
 <template>
-  <section class="container">
-    <!-- use userName if using single variable ref -->
-    <!-- <h2>{{ user.name }}</h2>
-    <h2>{{ user.age }}</h2> -->
-    <!-- <h2>{{ uName }}</h2>
-    <h2>{{ uAge }}</h2> -->
-    <user-data :firstName="firstName" :lastName="lastName" :userAge="uAge"></user-data>
-    <button @click="changeAge">Change Age</button>
-    <input v-model="firstName">
-    <input ref="lastNameInput">
-    <button @click="setLastName">Set Last Name</button>
-
-  </section>
+  <main>
+    <user-list :users="activeUsers" @list-projects="selectUser"></user-list>
+    <projects-list :user="selectedUser"></projects-list>
+  </main>
 </template>
 
 <script>
-import {
-   ref
-  //,reactive
-  ,computed
-  , watch
-  //, provide
+import USER_DATA from './dummy-data.js';
 
-  // life cycle methods create, beforeCreate are not needed in comp api because they are happening at the same time as setup
-  // onBeforeMount,
-  // onMounted,
-  // onBeforeUpdate,
-  // onUpdated,
-  // onBeforeUnmount,
-  // onUnMounted
-  } from 'vue'
+import UserList from './components/users/UserList.vue';
+import ProjectsList from './components/projects/ProjectsList.vue';
 
-import UserData from './components/UserData.vue'
+import { ref } from 'vue'
+
 export default {
   components: {
-    UserData
+    UserList,
+    ProjectsList,
+  },
+  setup() {
+    const selectedUser = ref(null)
+    const activeUsers = USER_DATA
+
+    function selectUser(uid){
+      selectedUser.value = activeUsers.find((usr) => usr.id === uid);
+    }
+
+    return {
+      selectedUser,
+      activeUsers,
+      selectUser
+    }
   },
   // data() {
   //   return {
-  //     userName: 'Maximilian',
+  //     selectedUser: null,
+  //     activeUsers: USER_DATA,
   //   };
   // },
-  setup(
-    //props, context
-    ) {
-    // single variable ref
-    // const uName = ref('Maximilian');
-
-    // setTimeout(function(){
-    //   uName.value = 'Max';
-    // }, 2000);
-    // return { userName: uName };
-
-    // object ref
-    // const user = ref({
-    //   name: 'Maximilian',
-    //   age: 31
-    // });
-
-    // setTimeout(function(){
-    //   user.value.name = 'Max';
-    //   user.value.age = 32;
-    // }, 2000);
-    // return { user: user };
-
-    // object reactive
-    // const user = reactive({
-    //   name: 'Maximilian',
-    //   age: 31
-    // })
-
-    // setTimeout(function(){
-    //   user.name = 'Max';
-    //   user.age = 32;
-    // }, 2000);
-    // return { user: user };
-
-    const firstName = ref('');
-    const lastName = ref('');
-
-    const uAge = ref(31);
-
-    const uName = computed(function() {
-      return firstName.value + ' ' + lastName.value
-    })
-
-    const lastNameInput = ref(null);
-
-    function changeAge() {
-      uAge.value = 32;
-    }
-
-    function setLastName() {
-      lastName.value = lastNameInput.value.value;
-    }
-
-    watch([uAge, uName], function(newValues, oldValues) {
-      console.log('oldAge', oldValues[0])
-      console.log('newAge', newValues[0])
-      console.log('oldName', oldValues[1])
-      console.log('newName', newValues[1])
-    });
-
-
-    // context.emit('event-name', data)
-
-    // provide('userAge', uAge);
-
-    return {
-      uName,
-      uAge,
-      changeAge,
-      firstName,
-      lastName,
-      setLastName,
-      lastNameInput
-    }
-  }
+  // methods: {
+  //   selectUser(uid) {
+  //     this.selectedUser = this.activeUsers.find((usr) => usr.id === uid);
+  //   },
+  // },
 };
 </script>
 
@@ -124,21 +50,34 @@ export default {
 * {
   box-sizing: border-box;
 }
-
 html {
   font-family: sans-serif;
 }
-
 body {
   margin: 0;
 }
 
-.container {
-  margin: 3rem auto;
-  max-width: 30rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
-  text-align: center;
+main {
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  font: inherit;
+  border: 1px solid #00006b;
+  background-color: transparent;
+  color: #00006b;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+button:hover,
+button:active {
+  background-color: #efefff;
+}
+
+button.selected {
+  background-color: #00006b;
+  color: white;
 }
 </style>
