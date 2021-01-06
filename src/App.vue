@@ -3,11 +3,13 @@
     <!-- use userName if using single variable ref -->
     <!-- <h2>{{ user.name }}</h2>
     <h2>{{ user.age }}</h2> -->
-    <h2>{{ uName }}</h2>
-    <h2>{{ uAge }}</h2>
+    <!-- <h2>{{ uName }}</h2>
+    <h2>{{ uAge }}</h2> -->
+    <user-data :firstName="firstName" :lastName="lastName" :userAge="uAge"></user-data>
     <button @click="changeAge">Change Age</button>
     <input v-model="firstName">
-    <input v-model="lastName">
+    <input ref="lastNameInput">
+    <button @click="setLastName">Set Last Name</button>
 
   </section>
 </template>
@@ -18,14 +20,30 @@ import {
   //,reactive
   ,computed
   , watch
+  //, provide
+
+  // life cycle methods create, beforeCreate are not needed in comp api because they are happening at the same time as setup
+  // onBeforeMount,
+  // onMounted,
+  // onBeforeUpdate,
+  // onUpdated,
+  // onBeforeUnmount,
+  // onUnMounted
   } from 'vue'
+
+import UserData from './components/UserData.vue'
 export default {
+  components: {
+    UserData
+  },
   // data() {
   //   return {
   //     userName: 'Maximilian',
   //   };
   // },
-  setup() {
+  setup(
+    //props, context
+    ) {
     // single variable ref
     // const uName = ref('Maximilian');
 
@@ -67,8 +85,14 @@ export default {
       return firstName.value + ' ' + lastName.value
     })
 
+    const lastNameInput = ref(null);
+
     function changeAge() {
       uAge.value = 32;
+    }
+
+    function setLastName() {
+      lastName.value = lastNameInput.value.value;
     }
 
     watch([uAge, uName], function(newValues, oldValues) {
@@ -78,12 +102,19 @@ export default {
       console.log('newName', newValues[1])
     });
 
+
+    // context.emit('event-name', data)
+
+    // provide('userAge', uAge);
+
     return {
       uName,
       uAge,
       changeAge,
       firstName,
-      lastName
+      lastName,
+      setLastName,
+      lastNameInput
     }
   }
 };
