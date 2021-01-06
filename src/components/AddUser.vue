@@ -9,20 +9,20 @@
 </template>
 
 <script>
-import alertMixin from '../mixins/alert';
 import UserAlert from './UserAlert.vue';
+import useAlert from '../hooks/alert';
 
 export default {
   components: {
     UserAlert,
   },
-  // if we add a data property which is already in the mixin here in the component,
-  // the component value overrides it
-  // for e,g
-  // data() {
-  // return { isAlertVisible: true }
-  //}
-  // this would make the add user dialog visible on page load
-  mixins: [ alertMixin ]
+  setup() {
+    const { alertIsVisible, showAlert, hideAlert } = useAlert();
+    return {
+      alertIsVisible,
+      showAlert,
+      hideAlert
+    }
+  },
 };
 </script>
